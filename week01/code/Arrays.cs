@@ -12,8 +12,16 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+        
+        double[] multiples = new double[length]; // I created a new list with the length of the parameter given
+        
+        for (int i = 0; i < length; i++)  // Inside this loop we iterate over the possible multiples 
+        {
+            multiples[i] = number * (i + 1); // Multiplication
+        }
 
-        return []; // replace this return statement with your own
+
+        return multiples; // Now we return the list with the multiples of the number given and with the length given
     }
 
     /// <summary>
@@ -23,11 +31,20 @@ public static class Arrays
     ///
     /// Because a list is dynamic, this function will modify the existing data list rather than returning a new list.
     /// </summary>
+    /// 
+
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // Step 1: Adjust amount if it's larger than the list size
+        amount = amount % data.Count;
+
+    // Step 2: 
+        List<int> rotatedPart = data.GetRange(data.Count - amount, amount); // Gettng the number desired til the last element of the List
+        List<int> remainingPart = data.GetRange(0, data.Count - amount);    // Getting the elements before the number desired
+
+    // Step 3:
+    data.Clear(); // Clear the original list so we can add the new list in this List
+    data.AddRange(rotatedPart); // Add rotated part first
+    data.AddRange(remainingPart); // Add remaining part next (Those elements before the number desired)
     }
 }
