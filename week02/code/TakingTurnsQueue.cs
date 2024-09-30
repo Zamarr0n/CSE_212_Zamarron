@@ -7,6 +7,7 @@
 /// less than they will stay in the queue forever.  If a person is out of turns then they will 
 /// not be added back into the queue.
 /// </summary>
+using System.Diagnostics;
 public class TakingTurnsQueue
 {
     private readonly PersonQueue _people = new();
@@ -20,8 +21,10 @@ public class TakingTurnsQueue
     /// <param name="turns">Number of turns remaining</param>
     public void AddPerson(string name, int turns)
     {
-        var person = new Person(name, turns);
+        var person = new Person(name, turns);    
         _people.Enqueue(person);
+        // Debug.WriteLine("How the list _people started:");
+        // Debug.WriteLine(_people);
     }
 
     /// <summary>
@@ -31,8 +34,11 @@ public class TakingTurnsQueue
     /// person has an infinite number of turns.  An error exception is thrown 
     /// if the queue is empty.
     /// </summary>
+    /// 
+
     public Person GetNextPerson()
     {
+        
         if (_people.IsEmpty())
         {
             throw new InvalidOperationException("No one in the queue.");
@@ -40,15 +46,43 @@ public class TakingTurnsQueue
         else
         {
             Person person = _people.Dequeue();
-            if (person.Turns > 1)
-            {
-                person.Turns -= 1;
-                _people.Enqueue(person);
-            }
+            if (person.Turns <= 0 )
+        {   
 
+            _people.Enqueue(person);
+
+        }
+        else if (person.Turns > 1)
+        {
+            person.Turns -= 1;
+            _people.Enqueue(person);
+        }
+        else if (person.Turns == 1){
+            Debug.WriteLine("Person is out of turns, removing from queue.");
+            Debug.WriteLine(person);
+        }
+        else
+        {
+            _people.Enqueue(person);
+        }
+
+            // Debug.WriteLine("fin del else statement.");
+            // Debug.WriteLine(person);
+            // Debug.WriteLine("Resultado final:");
+            // Debug.WriteLine(_people);
             return person;
         }
     }
+
+
+
+
+
+
+
+
+
+
 
     public override string ToString()
     {
