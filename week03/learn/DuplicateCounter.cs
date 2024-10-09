@@ -23,8 +23,16 @@
     }
 
     private static int CountDuplicates(int[] data)
-    {
+    {   
+        int [] data2 = [];
         // Add code here.
-        return 0;
+        for (int i = 0; i < 100; i++)
+        {
+            if (data.Contains(i)){
+                data2[i]++;
+                Console.WriteLine(data2);
+            }
+        }
+        return data2.Length;
     }
 }
