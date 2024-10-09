@@ -60,21 +60,16 @@ public static class SetsAndMaps
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
             string degree = fields[3];
-            // degrees.Add(degree, 9);
             Debug.WriteLine(degree);
-              // Make sure the line has at least 4 columns (0-based index for the 4th column is 3)
             if (fields.Length >= 4)
             {
                 
-
-                // If the degree already exists in the dictionary, increment its count
                 if (degrees.ContainsKey(degree))
                 {
                     degrees[degree]++;
                 }
                 else
                 {
-                    // Otherwise, add the degree with a count of 1
                     degrees[degree] = 1;
                 }
             }
@@ -103,21 +98,14 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        // First, convert both words to lowercase and remove any spaces
-         // Normalize both words by removing spaces and converting to lowercase
         word1 = word1.Replace(" ", "").ToLower();
         word2 = word2.Replace(" ", "").ToLower();
-
-        // If the lengths of the normalized words are different, they cannot be anagrams
         if (word1.Length != word2.Length)
         {
             return false;
         }
 
-        // Dictionary to store letter counts
         Dictionary<char, int> letterCounts = new Dictionary<char, int>();
-
-        // Count the occurrences of each letter in word1
         foreach (char c in word1)
         {
             if (letterCounts.ContainsKey(c))
@@ -129,15 +117,13 @@ public static class SetsAndMaps
                 letterCounts[c] = 1;
             }
         }
-
-        // Decrease the occurrences based on word2
+        
         foreach (char c in word2)
         {
             if (letterCounts.ContainsKey(c))
             {
                 letterCounts[c]--;
                 
-                // If count goes negative, it means word2 has an extra character
                 if (letterCounts[c] < 0)
                 {
                     return false;
@@ -145,12 +131,10 @@ public static class SetsAndMaps
             }
             else
             {
-                // If word2 contains a letter not in word1, they're not anagrams
                 return false;
             }
         }
-
-        // Check if all counts are zero, confirming both words used the same letters
+        
         foreach (var count in letterCounts.Values)
         {
             if (count != 0)
@@ -158,9 +142,7 @@ public static class SetsAndMaps
                 return false;
             }
         }
-
-        return true; // The words are anagrams
-        // return false;
+        return true; 
     }
 
     /// <summary>
