@@ -51,21 +51,18 @@ public class LinkedList : IEnumerable<int>
     /// Remove the first node (i.e. the head) of the linked list.
     /// </summary>
     public void RemoveHead()
-    {
-        // If the list has only one item in it, then set head and tail 
-        // to null resulting in an empty list.  This condition will also
-        // cover an empty list.  Its okay to set to null again.
+    {   
+        
         if (_head == _tail)
         {
             _head = null;
             _tail = null;
         }
-        // If the list has more than one item in it, then only the head
-        // will be affected.
+        
         else if (_head is not null)
         {
-            _head.Next!.Prev = null; // Disconnect the second node from the first node
-            _head = _head.Next; // Update the head to point to the second node
+            _head.Next!.Prev = null; 
+            _head = _head.Next; 
         }
     }
 
@@ -91,34 +88,31 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void InsertAfter(int value, int newValue)
     {
-        // Search for the node that matches 'value' by starting at the 
-        // head of the list.
+        
         Node? curr = _head;
         while (curr is not null)
         {
             if (curr.Data == value)
             {
-                // If the location of 'value' is at the end of the list,
-                // then we can call insert_tail to add 'new_value'
+                
+                
                 if (curr == _tail)
                 {
                     InsertTail(newValue);
                 }
-                // For any other location of 'value', need to create a 
-                // new node and reconnect the links to insert.
                 else
                 {
                     Node newNode = new(newValue);
-                    newNode.Prev = curr; // Connect new node to the node containing 'value'
-                    newNode.Next = curr.Next; // Connect new node to the node after 'value'
-                    curr.Next!.Prev = newNode; // Connect node after 'value' to the new node
-                    curr.Next = newNode; // Connect the node containing 'value' to the new node
+                    newNode.Prev = curr; 
+                    newNode.Next = curr.Next; 
+                    curr.Next!.Prev = newNode;
+                    curr.Next = newNode; 
                 }
 
-                return; // We can exit the function after we insert
+                return; 
             }
 
-            curr = curr.Next; // Go to the next node to search for 'value'
+            curr = curr.Next; 
         }
     }
 
